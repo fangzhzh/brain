@@ -1,0 +1,37 @@
+var userSchema = new Schema({
+  user_id: { type:Number, required: true, unique: true},
+  name: String,
+  password: { type: String, required: true },
+  bind_device: Number, // bit-wise, 0 fitbit 1 nike+, 2 runkeeper 3 google fit
+  carer: {array: Number} // one-way relationship
+});
+
+
+var HealthSchema = new Schema({
+    user_id: Number,
+    mod_time: { type: Date, default: Date.now },
+    create_time: { type: Date, default: Date.now },
+    steps: Number,
+    distance: Number,
+    activity: Number,
+    sleep_time: Number,
+    deep_sleep_time: Number,
+    weight: Number,
+    height: Number,
+    heart_rate: Number
+})
+
+
+var Recommendation = new Schema({
+  message_id: long,
+  type: Number, // article, place, a
+  scheduled_time: { type: Date, default: Date.now },
+  sent_time: { type: Date, default: Date.now },
+})
+
+var Recipe = new Scheme ({
+  user_id: Number,
+  recommendation: long,
+  source_type: Number, // system, user, developer
+})
+
