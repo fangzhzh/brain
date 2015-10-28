@@ -4,6 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoConnectionString = "mongodb://127.0.0.1/agenda";
+
+// agenda
+var Agenda= require('agenda')
+var agendaUI = require('agenda-ui');
+var agenda = new Agenda({db: {address: mongoConnectionString}});
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -27,7 +33,33 @@ app.use('/', index);
 app.use('/steps',steps);
 app.use('/sleep', sleep);
 app.use('/users', users);
+//    app.use('/agenda-ui', agendaUI(agenda, {poll: 1000}));
 
+//    agenda.define('collect data', function(job, done){
+//        console.log(job.attrs.data.time, 'collect data!');
+//        var Slack = require('node-slack');
+//        var slack = new Slack("https://hooks.slack.com/services/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",{});
+//        slack.send({
+//                text: 'Howdy!',
+//                channel: '#zhangzf_s-note',
+//                username: 'jenkins'
+//        });
+//    });
+//    
+//    agenda.on('ready', function() {
+//      //agenda.every('3 minutes', 'delete old users');
+//      agenda.every('10 seconds', 'collect data');
+//    
+//      // Alternatively, you could also do:
+//      agenda.every('*/1 * * * *', 'collect data');
+//    
+//      agenda.schedule('in 10 seconds', 'collect data', {time: new Date()});
+//      console.log('agenda start')
+//      agenda.start();
+//      agenda.processEvery('one minute');
+//    });
+
+console.log('Wait 10 seconds...');
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
