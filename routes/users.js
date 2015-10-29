@@ -17,17 +17,16 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   var bad = req.body;
-  console.log(JSON.stringify(bad));
   var mike= new User({
-    name: req.query.name,
+    user_name: req.query.name,
     password: req.query.password,
-    bindDevices: req.query.bind_device,
-    username:req.query.name
+    bind_devices: req.query.bind_device,
+    nick_name:req.query.nick_name
   });
   mike.save( function(err){
      if (err) throw err;
  
-     console.log('user '+mike.name + ' saved success');
+     console.log('user '+mike.user_name + ' saved success');
   });
   res.send('respond with from sleep');
 });

@@ -1,3 +1,9 @@
+// for user id auto increasement
+var CounterSchema = Schema({
+   _id: {type: String, required: true},
+   seq: { type: Number, default: 0 }
+});
+
 var userSchema = new Schema({
   user_id: { type:Number, required: true, unique: true},
   name: String,
@@ -23,7 +29,7 @@ var HealthSchema = new Schema({
 
 
 var Recommendation = new Schema({
-  message_id: long,
+  message_id: Number,
   type: Number, // article, place, a
   scheduled_time: { type: Date, default: Date.now },
   sent_time: { type: Date, default: Date.now },
@@ -31,7 +37,7 @@ var Recommendation = new Schema({
 
 var Recipe = new Scheme ({
   user_id: Number,
-  recommendation: long,
+  recommendation: Number,
   source_type: Number, // system, user, developer
 })
 
