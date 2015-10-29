@@ -4,40 +4,74 @@ var CounterSchema = Schema({
    seq: { type: Number, default: 0 }
 });
 
+// for users
 var userSchema = new Schema({
-  user_id: { type:Number, required: true, unique: true},
-  name: String,
+  userId: { type: Number, required: true, unique: true},
+  userName: String,
+  nickName: String,
+  gender: Number, // 0 male, 1 Female, 2 other
+  carer: [ Number ], 
+  careGiver: [ Number ],
   password: { type: String, required: true },
-  bind_device: Number, // bit-wise, 0 fitbit 1 nike+, 2 runkeeper 3 google fit
-  carer: {array: Number} // one-way relationship
+  createdTime: { type: Date, default: Date.now },
+  updatedTime: { type: Date, default: Date.now },
+  google: {
+    name: String,
+    toke: String,
+    userid: String
+  },
+  fibit: {
+    name: String,
+    toke: String,
+    userid: String
+
+  },
+  apple: {
+    name: String,
+    toke: String,
+    userid: String
+
+  }
+});
+
+// for health data
+var HealthSchema = new Schema({
+  userId: Number,
+  modTime: { type: Date, default: Date.now },
+  createTime: { type: Date, default: Date.now },
+  steps: Number,
+  distance: Number,
+  activity: Number,
+  sleepTime: Number,
+  deepSleepTime: Number,
+  heartRate: Number
+});
+
+// health box
+var HealthBoxSchema = new Schema({
+  createTime:  { type: Date, default: Date.now },
+  stepsLevel: Number, // 0 normal, 1 average, 2 above
+  distanceLevel: Number, // 0 low 1 average 2 above
+  activity: Number,  // 0 low 1 average 2 above
+  sleepTime: Number, // 0 low 1 average 2 above
+  sleepQuality: Number // 0 low 1 average 2 above
 });
 
 
-var HealthSchema = new Schema({
-    user_id: Number,
-    mod_time: { type: Date, default: Date.now },
-    create_time: { type: Date, default: Date.now },
-    steps: Number,
-    distance: Number,
-    activity: Number,
-    sleep_time: Number,
-    deep_sleep_time: Number,
-    weight: Number,
-    height: Number,
-    heart_rate: Number
-})
-
-
-var Recommendation = new Schema({
+// recommendation
+var RecommendationSchema = new Schema({
   message_id: Number,
-  type: Number, // article, place, a
-  scheduled_time: { type: Date, default: Date.now },
-  sent_time: { type: Date, default: Date.now },
+  type: Number, // article = 0, place = 1, nudge = 2
+  scheduledTime: { type: Date, default: Date.now },
+  sentTime: { type: Date, default: Date.now },
 })
 
+// recommendation example 
+
+
+// 
 var Recipe = new Scheme ({
-  user_id: Number,
+  userId: Number,
   recommendation: Number,
-  source_type: Number, // system, user, developer
+  sourceType: Number, // system, user, developer
 })
-

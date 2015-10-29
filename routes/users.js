@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../model/dbuser');
-var multer = require('multer'); 
-var upload = multer();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -16,8 +14,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  var bad = req.body;
-  var mike= new User({
+  var mike = new User({
     user_name: req.query.name,
     password: req.query.password,
     bind_devices: req.query.bind_device,
@@ -32,8 +29,14 @@ router.post('/', function(req, res, next) {
 });
 
 router.delete('/:userid',function(req, res, next){
-  console.log("delete: ");
-  console.log(req.params.userid);
-  res.send('delete susscess')
-});
+  User.remove({user_id: req.params.userid}, function(err) {
+    if(error)
+      return next(error);
+  console.log(rreq.params.userid+'delete susscess');
+  res.send(req.params.userid+'delete susscess')
+})});
+
 module.exports = router;
+module.exports.sayHello = function( hello) {
+  console.log(hello + " from users module");
+}

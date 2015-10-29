@@ -4,23 +4,15 @@ var Schema = mongoose.Schema;
 
 // health
 var HealthSchema = new Schema({
-    user_id: { type: Number, required: true },
-    mod_time: { type: Date, default: Date.now },
-    create_time: { type: Date, default: Date.now },
+    userId: Number,
+    modTime: { type: Date, default: Date.now },
+    createTime: { type: Date, default: Date.now },
     steps: Number,
     distance: Number,
     activity: Number,
-    sleep_time: Number,
-    deep_sleep_time: Number,
-    weight: Number,
-    height: Number,
-    heart_rate: Number
-});
-
-
-var CounterSchema = new Schema({
-   _id: {type: String, required: true},
-   seq: { type: Number, default: 0 }
+    sleepTime: Number,
+    deepSleepTime: Number,
+    heartRate: Number
 });
 
 var Health = mongoose.model('health', HealthSchema);
